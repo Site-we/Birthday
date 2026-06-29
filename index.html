@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Celestial Celebration for Chandni ✨</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #060813;
+            --gold: #dfba59;
+            --gold-light: #f3e5ab;
+            --cream: #fffdf9;
+            --transition-smooth: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-dark);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            color: var(--cream);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Ambient Background Canvas */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Screen Wrapper Management */
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            transition: var(--transition-smooth);
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.9) translateY(-30px);
+        }
+
+        /* --- LUXURY INTERACTIVE ENVELOPE STATIONERY --- */
+        .envelope-container {
+            width: 440px;
+            height: 280px;
+            background: linear-gradient(135deg, #11162d 0%, #070914 100%);
+            border-radius: 8px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.85), 
+                        inset 0 0 40px rgba(223, 186, 89, 0.12);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s ease;
+            overflow: hidden;
+        }
+
+        /* Premium Double-Line Gold Foil Filigree Frame Overlay */
+        .envelope-container::before {
+            content: '';
+            position: absolute;
+            top: 14px; left: 14px; right: 14px; bottom: 14px;
+            border: 1px solid rgba(223, 186, 89, 0.35);
+            pointer-events: none;
+            border-radius: 6px;
+        }
+
+        .envelope-container::after {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 2px solid var(--gold);
+            pointer-events: none;
+            border-radius: 4px;
+            opacity: 0.85;
+        }
+
+        /* Dynamic 3D Lift & Illumination Effects on Hover */
+        .envelope-container:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.9), 
+                        0 0 30px rgba(223, 186, 89, 0.15);
+        }
+
+        /* Animated Light-Glint Metallic Sheen Overlay */
+        .envelope-sheen {
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.07), transparent);
+            transform: skewX(-30deg);
+            pointer-events: none;
+        }
+
+        .envelope-container:hover .envelope-sheen {
+            left: 160%;
+            transition: left 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Premium Foil Calligraphy Address Text */
+        .envelope-addressee {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 10%, var(--gold-light) 60%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 3;
+        }
+
+        .envelope-subtext {
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #7d8ea6;
+            margin-top: 6px;
+            font-weight: 300;
+            z-index: 3;
+        }
+
+        /* Realistic Organic Hot Wax Seal Drip Component */
+        .envelope-seal {
+            width: 68px;
+            height: 68px;
+            background: radial-gradient(circle at 35% 35%, #ffe484 0%, #dfba59 45%, #926a11 100%);
+            border-radius: 48% 52% 51% 49% / 45% 53% 47% 55%; /* Purposefully irregular stamp silhouette */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #211c10;
+            font-size: 1.7rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5), 
+                        inset 2px 2px 6px rgba(255,255,255,0.5),
+                        inset -3px -3px 6px rgba(0,0,0,0.4);
+            z-index: 4;
+            margin-top: 25px;
+            animation: pulseGlow 2.5s infinite ease-in-out;
+        }
+
+        /* --- THE GRAND CELEBRATION AREA --- */
+        .celebration-header {
+            text-align: center;
+            z-index: 5;
+            max-width: 90%;
+        }
+
+        .celebration-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4.2rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, #fff 20%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            animation: titleFloat 4s infinite ease-in-out;
+        }
+
+        .celebration-header .target-name {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            color: var(--cream);
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.2);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .celebration-header p {
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #8fa0ba;
+            font-weight: 200;
+        }
+
+        /* Floating Interactive Balloons */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 75px;
+            height: 95px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            cursor: pointer;
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: white;
+            box-shadow: inset -8px -8px 20px rgba(0,0,0,0.3), 0 10px 25px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 8px solid currentColor;
+        }
+
+        /* Floating Dynamic Toast Text Notification */
+        #toast-notification {
+            position: absolute;
+            bottom: 10%;
+            background: rgba(223, 186, 89, 0.15);
+            border: 1px solid var(--gold);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        #toast-notification.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- CORE ANIMATION LOOPS --- */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 15px rgba(223,186,89,0.3); transform: scale(1); }
+            50% { box-shadow: 0 8px 25px rgba(0,0,0,0.6), 0 0 25px rgba(223,186,89,0.6); transform: scale(1.04); }
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mobile Responsive Normalization */
+        @media (max-width: 768px) {
+            .envelope-container { width: 90%; max-width: 360px; height: 240px; }
+            .envelope-addressee { font-size: 1.9rem; }
+            .celebration-header h1 { font-size: 2.3rem; }
+            .celebration-header .target-name { font-size: 2.8rem; }
+            .celebration-header p { font-size: 0.8rem; letter-spacing: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Space Matrix -->
+    <canvas id="spaceCanvas"></canvas>
+
+    <!-- SCREEN 1: LUXURY ROYAL ENVELOPE INTERACTION LAYER -->
+    <div class="screen" id="screen-envelope">
+        <div class="envelope-container" onclick="openCelebration()">
+            <div class="envelope-sheen"></div>
+            <div class="envelope-addressee">Chandni</div>
+            <div class="envelope-subtext">A Celestial Invitation</div>
+            <div class="envelope-seal">✨</div>
+        </div>
+        <p style="margin-top: 35px; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase; color: var(--gold); font-weight: 300;">Break the seal to begin</p>
+    </div>
+
+    <!-- SCREEN 2: MAIN CINEMATIC CELEBRATION PAGE -->
+    <div class="screen hidden" id="screen-main">
+        <div class="celebration-header">
+            <h1>HAPPY BIRTHDAY</h1>
+            <span class="target-name" id="display-name">CHANDNI</span>
+            <p>May your year be written in stardust and brilliant victories</p>
+        </div>
+
+        <div id="toast-notification">Blessing Unlocked!</div>
+    </div>
+
+    <script>
+        const spaceCanvas = document.getElementById('spaceCanvas');
+        const sCtx = spaceCanvas.getContext('2d');
+        const toast = document.getElementById('toast-notification');
+
+        // State Framework Matrix
+        let appState = {
+            currentPhase: 'ENVELOPE',
+            stars: [],
+            balloons: [],
+            confetti: []
+        };
+
+        const BLESSINGS = ["Joy ☀️", "Adventure 🧭", "Success 🏆", "Health 🌱", "Love ❤️", "Magic ✨", "Anger 😡", "Peace 🕊️"];
+        const PALETTES = ['#f43f5e', '#38bdf8', '#dfba59', '#a78bfa', '#34d399', '#fb923c'];
+
+        function resize() {
+            const dpr = window.devicePixelRatio || 1;
+            spaceCanvas.width = window.innerWidth * dpr;
+            spaceCanvas.height = window.innerHeight * dpr;
+            sCtx.scale(dpr, dpr);
+            
+            if(appState.stars.length === 0) {
+                for(let i=0; i<120; i++) {
+                    appState.stars.push({
+                        x: Math.random() * window.innerWidth,
+                        y: Math.random() * window.innerHeight,
+                        radius: Math.random() * 1.5,
+                        alpha: Math.random(),
+                        speed: Math.random() * 0.02 + 0.005
+                    });
+                }
+            }
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // --- STATE TRANSLATOR & ENVELOPE BLAST LOGIC ---
+        function openCelebration() {
+            const startX = window.innerWidth / 2;
+            const startY = window.innerHeight / 2;
+            
+            // Generate radial propulsion geometry from the shattered wax seal coordinates
+            for(let i = 0; i < 160; i++) {
+                const randomColor = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+                const particle = new ConfettiParticle(startX, startY, randomColor);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const blastForce = Math.random() * 12 + 4;
+                particle.vx = Math.cos(angle) * blastForce;
+                particle.vy = Math.sin(angle) * blastForce;
+                particle.gravity = 0.07; 
+                particle.decay = Math.random() * 0.012 + 0.008; 
+                
+                appState.confetti.push(particle);
+            }
+
+            document.getElementById('screen-envelope').classList.add('hidden');
+            appState.stars.forEach(s => s.speed *= 15); // Accelerate hyper-drive field
+            
+            setTimeout(() => {
+                document.getElementById('screen-main').classList.remove('hidden');
+                appState.currentPhase = 'MAIN';
+                appState.stars.forEach(s => s.speed /= 12); // Stabilize tracking
+                
+                setInterval(spawnBalloon, 1400);
+                triggerConfettiShower();
+            }, 800);
+        }
+
+        // --- INTERACTIVE BALLOON ENGINE ---
+        function spawnBalloon() {
+            if(appState.currentPhase !== 'MAIN') return;
+            
+            const randomColor = PALETTES[Math.floor(Math.random() * PALETTES.length)];
+            const randomBlessing = BLESSINGS[Math.floor(Math.random() * BLESSINGS.length)];
+            
+            const bNode = document.createElement('div');
+            bNode.className = 'balloon';
+            bNode.style.backgroundColor = randomColor;
+            bNode.style.color = randomColor; 
+            bNode.style.left = (Math.random() * (window.innerWidth - 100) + 50) + 'px';
+            bNode.innerHTML = `<span style="color:white; pointer-events:none;">Pop Me</span>`;
+            
+            let verticalPos = -150;
+            let speed = Math.random() * 2 + 1.5;
+            let wiggleRange = Math.random() * 4 + 2;
+            let wiggleSpeed = Math.random() * 0.05 + 0.02;
+            let timeTracker = Math.random() * 100;
+
+            document.getElementById('screen-main').appendChild(bNode);
+
+            function updateBalloonTrack() {
+                if(!bNode.parentNode) return;
+                verticalPos += speed;
+                timeTracker += wiggleSpeed;
+                let horizontalShift = Math.sin(timeTracker) * wiggleRange;
+                
+                bNode.style.bottom = verticalPos + 'px';
+                bNode.style.transform = `translateX(${horizontalShift}px) rotate(${horizontalShift * 0.5}deg)`;
+
+                if(verticalPos > window.innerHeight + 150) {
+                    bNode.remove();
+                } else {
+                    requestAnimationFrame(updateBalloonTrack);
+                }
+            }
+            requestAnimationFrame(updateBalloonTrack);
+
+            bNode.addEventListener('mousedown', (e) => popBalloon(e, bNode, randomBlessing));
+            bNode.addEventListener('touchstart', (e) => popBalloon(e, bNode, randomBlessing), {passive: true});
+        }
+
+        function popBalloon(e, node, blessing) {
+            e.stopPropagation();
+            const rect = node.getBoundingClientRect();
+            const popX = rect.left + rect.width / 2;
+            const popY = rect.top + rect.height / 2;
+
+            createSparks(popX, popY, 25, node.style.backgroundColor);
+            
+            if(blessing === "Anger 😡") {
+                toast.innerText = `⚠️ Warning: Unlocked Anger 😡`;
+            } else {
+                toast.innerText = `🎁 Given: ${blessing}`;
+            }
+            
+            toast.classList.add('reveal');
+            node.remove();
+            
+            setTimeout(() => {
+                toast.classList.remove('reveal');
+            }, 2200);
+        }
+
+        // --- CANVAS PARTICLE RENDERING FRAMEWORK ---
+        class ConfettiParticle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.radius = Math.random() * 4 + 2;
+                this.vx = Math.random() * 6 - 3;
+                this.vy = Math.random() * -8 - 4;
+                this.gravity = 0.15;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.02 + 0.01;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += this.gravity;
+                this.alpha -= this.decay;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createSparks(x, y, count, color) {
+            for(let i=0; i<count; i++) {
+                appState.confetti.push(new ConfettiParticle(x, y, color));
+            }
+        }
+
+        function triggerConfettiShower() {
+            for (let i = 0; i < 60; i++) {
+                setTimeout(() => {
+                    createSparks(Math.random() * window.innerWidth, -20, 5, PALETTES[Math.floor(Math.random()*PALETTES.length)]);
+                }, i * 150);
+            }
+        }
+
+        function renderLoop() {
+            sCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            appState.stars.forEach(star => {
+                star.alpha += star.speed;
+                if(star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+                
+                sCtx.fillStyle = `rgba(255, 253, 249, ${Math.abs(star.alpha)})`;
+                sCtx.beginPath();
+                sCtx.arc(star.x, star.y, star.radius, 0, Math.PI*2);
+                sCtx.fill();
+            });
+
+            for(let i = appState.confetti.length - 1; i >= 0; i--) {
+                const p = appState.confetti[i];
+                p.update();
+                p.draw(sCtx);
+                if(p.alpha <= 0) appState.confetti.splice(i, 1);
+            }
+
+            requestAnimationFrame(renderLoop);
+        }
+
+        requestAnimationFrame(renderLoop);
+    </script>
+</body>
+</html>
